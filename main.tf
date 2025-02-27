@@ -17,11 +17,11 @@ locals {
   region     = "us-central1"
 }
 
-provider "google" {
-  project = local.project_id
-  region  = local.region
+#provider "google" {
+# project = local.project_id
+#  region  = local.region
   # credentials = file("gcp-credentials.json")
-}
+#}
 
 module "vpc-poc-1" {
   source       = "./poc/vpc"
