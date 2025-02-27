@@ -13,18 +13,18 @@ terraform {
 
 locals {
   stack_name = "terraform-poc"
-  project_id = "terraform-core-440121"
+  project_id = "third-index-438904-k2"
   region     = "us-central1"
 }
 
 provider "google" {
   project = local.project_id
   region  = local.region
-  credentials = file("gcp-credentials.json")
+  # credentials = file("gcp-credentials.json")
 }
 
 module "vpc-poc-1" {
-  source       = "./poc-1/vpc"
+  source       = "./poc/vpc"
   project_id   = local.project_id
   region       = local.region
   network_name = "${local.stack_name}-vpc-poc"
