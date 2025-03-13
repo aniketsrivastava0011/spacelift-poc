@@ -1,0 +1,8 @@
+# cloudbuild.yaml
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-north1-docker.pkg.dev/terraform-core-440121/sumsub-client-artifact/my-image:$SHORT_SHA', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-north1-docker.pkg.dev/terraform-core-440121/sumsub-client-artifact/my-image:$SHORT_SHA']
+images:
+  - 'europe-north1-docker.pkg.dev/terraform-core-440121/sumsub-client-artifact/my-image:$SHORT_SHA'
