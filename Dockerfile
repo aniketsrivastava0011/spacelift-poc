@@ -9,7 +9,7 @@ RUN apt-get update && \
 RUN a2enmod rewrite
 
 # Copy your website files (if any)
-COPY ./html/ /var/www/html/
+#COPY ./html/ /var/www/html/
 
 # Set the Apache2 foreground
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
