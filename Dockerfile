@@ -1,35 +1,18 @@
-# Stage 1: Build Stage (using a build environment)
-FROM golang:1.21-alpine AS builder
+# Use the official Ubuntu base image
+FROM ubuntu:latest
 
-# Set working directory
-WORKDIR /app
+# Update package lists and install Apache2
+RUN apt-get update && \
+    apt-get install -y apache2
 
-# Copy go.mod and go.sum
-COPY go.mod go.sum ./
+# Enable necessary Apache modules (optional)
+RUN a2enmod rewrite
 
-# Download dependencies
-RUN go mod download
+# Copy your website files (if any)
+COPY ./html/ /var/www/html/
 
-# Copy source code
-COPY . .
+# Set the Apache2 foreground
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
-# Build the application
-RUN go build -o my-app .
-
-# Stage 2: Runtime Stage (using a minimal runtime environment)
-FROM alpine:latest
-
-# Set working directory
-WORKDIR /app
-
-# Copy the built binary from the build stage
-COPY --from=builder /app/my-app ./
-
-# Copy other needed files. Example: static assets
-COPY static/ ./static/
-
-# Expose the port your application listens on
-EXPOSE 8080
-
-# Run the application
-CMD ["./my-app"]
+# Expose port 80
+EXPOSE 80
