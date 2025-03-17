@@ -3,8 +3,9 @@ FROM ubuntu:latest
 
 # Update package lists and install Apache2
 RUN apt-get update && \
-    apt-get install -y apache2 \
-    service apache2 start
+    apt-get install -y apache2
+    
+RUN service apache2 start
 
 # Enable necessary Apache modules (optional)
 RUN a2enmod rewrite
