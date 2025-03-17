@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 # Update package lists and install Apache2
 RUN apt-get update && \
-    apt-get install -y apache2
+    apt-get install -y apache2 \
     service apache2 start
 
 # Enable necessary Apache modules (optional)
